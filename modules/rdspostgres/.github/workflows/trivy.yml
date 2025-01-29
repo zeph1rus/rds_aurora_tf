@@ -1,0 +1,46 @@
+---
+    name: trivy_scan
+    on:
+      pull_request:
+       types: [opened, edited]
+       paths:
+        - '**.tf'
+
+    env:
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_DEFAULT_OUTPUT: json
+    
+    jobs:
+      trivy-test:
+        name: trivy
+        runs-on: ubuntu-latest
+        # These permissions are needed to interact with GitHub’s OIDC Token endpoint.
+        permissions:
+          id-token: write
+          contents: read
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+        - name: Configure AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v4
+          with:
+            aws-region: us-east-1
+            ## the following creates an ARN based on the values entered into github secrets
+            role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+            role-session-name: TrivyCheckSession
+        
+        - name: Run Trivy vulnerability scanner in IaC mode
+          uses: aquasecurity/trivy-action@0.20.0
+          with:
+            scan-type: 'config'
+            hide-progress: false
+            format: 'sarif'
+            output: 'trivy-results.sarif'
+            exit-code: '0'
+            ignore-unfixed: true
+            severity: 'CRITICAL,HIGH'
+    
+        - name: Upload Trivy scan results to GitHub Security tab
+          uses: github/codeql-action/upload-sarif@v3
+          with:
+            sarif_file: 'trivy-results.sarif'
