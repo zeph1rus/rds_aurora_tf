@@ -1,0 +1,8 @@
+.idea/
+.env
+*.terrraform.lock.hcl
+*.tfstate
+*.terraform/
+*.terraform\
+test/fixtures/tf_module/.terraform/
+test/fixtures/tf_module/terraform.tfstate.d/
