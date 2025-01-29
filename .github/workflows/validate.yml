@@ -37,7 +37,7 @@
           run: terraform init 
 
         - name: Terraform Validate
-          run: terraform validate -nocolor
+          run: terraform validate -no-color
 
         - name: Terraform Format
           run: terraform fmt -diff -recursive
