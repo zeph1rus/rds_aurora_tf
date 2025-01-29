@@ -42,5 +42,5 @@ module "rdspostgres" {
   security_group_ids      = [aws_security_group.db_security_group.id]
 
   # Add depends on the tell the graph not to delete any VPC resources before we delete the postgres resources
-  depends_on = [ aws_vpc.rgtsdbvpc ]
+  depends_on = [aws_vpc.rgtsdbvpc]
 }
