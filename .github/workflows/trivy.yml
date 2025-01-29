@@ -1,5 +1,5 @@
 ---
-    name: trivy_scan
+    name: Trivy Scan
     on:
       pull_request:
        types: [opened, edited]
@@ -35,13 +35,7 @@
           with:
             scan-type: 'config'
             hide-progress: false
-            format: 'sarif'
-            output: 'trivy-results.sarif'
+            format: 'github'
             exit-code: '0'
             ignore-unfixed: true
             severity: 'CRITICAL,HIGH'
-    
-        - name: Upload Trivy scan results to GitHub Security tab
-          uses: github/codeql-action/upload-sarif@v3
-          with:
-            sarif_file: 'trivy-results.sarif'
