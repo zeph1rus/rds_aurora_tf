@@ -5,6 +5,7 @@
        types: [opened, edited]
        paths:
         - '**.tf'
+      workflow_dispatch:
 
     env:
       AWS_DEFAULT_REGION: us-east-1
