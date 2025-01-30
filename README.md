@@ -22,8 +22,8 @@ An example is provided in `src/dev`
 | `master_username`          | The master username for the database                                    | string      | n/a      | yes      |
 | `master_password`          | The master password for the database                                    | string      | n/a      | yes      |
 | `vpc_security_group_ids`   | A list of VPC security group IDs to associate with the cluster          | list        | n/a      | yes      |
-| `subnet_group_subnet_ids`  | A list of subnet IDs for the RDS instance                               | list        | n/a      | yes      |
-| `subnet_group_name`        | The name that the subnet group will create                              | string      | n/a      | yes      |
+| `subnet_group_subnet_ids`  | A list of subnet IDs for the RDS instances                              | list        | n/a      | yes      |
+| `subnet_group_name`        | The name of the subnet group will be created                            | string      | n/a      | yes      |
 | `database_version`         | The version of the PostgreSQL engine                                    | string      | `16.6`   | no       |
 | `max_capacity`             | The max capacity of the instances in Aurora Capacity Units              | number      | `64`     | no       |
 | `min_capacity`             | The minimum capacity of the database, set to 0 to enable auto pause     | number      | `0`      | no       |
